@@ -1,0 +1,142 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "airquality_dashboard",
+    "title": "Air Quality - Live",
+    "tags": ["airquality", "streaming", "debezium", "kafka"],
+    "timezone": "browser",
+    "schemaVersion": 36,
+    "version": 1,
+    "refresh": "10s",
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "gridPos": { "x": 0, "y": 0, "w": 6, "h": 8 },
+        "type": "timeseries",
+        "title": "PM2.5 (μg/m³)",
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "datasource": null,
+            "rawSql": "SELECT $__timeEpoch(current_time) as time, pm2_5 as value FROM air_quality WHERE $__timeFilter(current_time) ORDER BY current_time ASC"
+          }
+        ],
+        "fieldConfig": { "defaults": {}, "overrides": [] }
+      },
+      {
+        "id": 2,
+        "gridPos": { "x": 6, "y": 0, "w": 6, "h": 8 },
+        "type": "timeseries",
+        "title": "PM10 (μg/m³)",
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "datasource": null,
+            "rawSql": "SELECT $__timeEpoch(current_time) as time, pm10 as value FROM air_quality WHERE $__timeFilter(current_time) ORDER BY current_time ASC"
+          }
+        ],
+        "fieldConfig": { "defaults": {}, "overrides": [] }
+      },
+      {
+        "id": 3,
+        "gridPos": { "x": 12, "y": 0, "w": 6, "h": 8 },
+        "type": "timeseries",
+        "title": "Ozone (ppb)",
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "datasource": null,
+            "rawSql": "SELECT $__timeEpoch(current_time) as time, ozone as value FROM air_quality WHERE $__timeFilter(current_time) ORDER BY current_time ASC"
+          }
+        ],
+        "fieldConfig": { "defaults": {}, "overrides": [] }
+      },
+      {
+        "id": 4,
+        "gridPos": { "x": 18, "y": 0, "w": 6, "h": 8 },
+        "type": "timeseries",
+        "title": "Carbon Monoxide (ppm)",
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "datasource": null,
+            "rawSql": "SELECT $__timeEpoch(current_time) as time, carbon_monoxide as value FROM air_quality WHERE $__timeFilter(current_time) ORDER BY current_time ASC"
+          }
+        ],
+        "fieldConfig": { "defaults": {}, "overrides": [] }
+      },
+      {
+        "id": 5,
+        "gridPos": { "x": 0, "y": 8, "w": 6, "h": 8 },
+        "type": "timeseries",
+        "title": "Nitrogen Dioxide (ppb)",
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "datasource": null,
+            "rawSql": "SELECT $__timeEpoch(current_time) as time, nitrogen_dioxide as value FROM air_quality WHERE $__timeFilter(current_time) ORDER BY current_time ASC"
+          }
+        ],
+        "fieldConfig": { "defaults": {}, "overrides": [] }
+      },
+      {
+        "id": 6,
+        "gridPos": { "x": 6, "y": 8, "w": 6, "h": 8 },
+        "type": "timeseries",
+        "title": "Sulphur Dioxide (ppb)",
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "datasource": null,
+            "rawSql": "SELECT $__timeEpoch(current_time) as time, sulphur_dioxide as value FROM air_quality WHERE $__timeFilter(current_time) ORDER BY current_time ASC"
+          }
+        ],
+        "fieldConfig": { "defaults": {}, "overrides": [] }
+      },
+      {
+        "id": 7,
+        "gridPos": { "x": 12, "y": 8, "w": 6, "h": 8 },
+        "type": "timeseries",
+        "title": "UV Index",
+        "targets": [
+          {
+            "refId": "A",
+            "format": "time_series",
+            "datasource": null,
+            "rawSql": "SELECT $__timeEpoch(current_time) as time, uv_index as value FROM air_quality WHERE $__timeFilter(current_time) ORDER BY current_time ASC"
+          }
+        ],
+        "fieldConfig": { "defaults": {}, "overrides": [] }
+      },
+      {
+        "id": 8,
+        "gridPos": { "x": 18, "y": 8, "w": 6, "h": 8 },
+        "type": "table",
+        "title": "Latest Readings",
+        "targets": [
+          {
+            "refId": "A",
+            "format": "table",
+            "datasource": null,
+            "rawSql": "SELECT current_time, location, latitude, longitude, elevation, pm2_5, pm10, ozone, carbon_monoxide, nitrogen_dioxide, sulphur_dioxide, uv_index FROM air_quality WHERE $__timeFilter(current_time) ORDER BY current_time DESC LIMIT 50"
+          }
+        ],
+        "fieldConfig": { "defaults": {}, "overrides": [] },
+        "options": {}
+      }
+    ],
+    "templating": { "list": [] },
+    "annotations": { "list": [] }
+  },
+  "overwrite": false
+}
