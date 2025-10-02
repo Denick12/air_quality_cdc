@@ -1,4 +1,4 @@
-FROM apache/airflow:2.7.2
+FROM apache/airflow:2.9.2
 
 # Switch to root for system deps
 USER root
